@@ -7,6 +7,9 @@
 \*===----------------------------------------------------------------------===*/
 
   switch (A->getKind()) {
+  case attr::AArch64VectorPcs: {
+    break;
+  }
   case attr::AMDGPUFlatWorkGroupSize: {
     const auto *SA = cast<AMDGPUFlatWorkGroupSizeAttr>(A);
     OS << " " << SA->getMin();
@@ -704,6 +707,9 @@
   case attr::NoDebug: {
     break;
   }
+  case attr::NoDeref: {
+    break;
+  }
   case attr::NoDestroy: {
     break;
   }
@@ -809,6 +815,18 @@
     break;
   }
   case attr::OMPThreadPrivateDecl: {
+    break;
+  }
+  case attr::OSConsumed: {
+    break;
+  }
+  case attr::OSConsumesThis: {
+    break;
+  }
+  case attr::OSReturnsNotRetained: {
+    break;
+  }
+  case attr::OSReturnsRetained: {
     break;
   }
   case attr::ObjCBoxable: {
@@ -1166,6 +1184,9 @@
       dumpStmt(*I);
     break;
   }
+  case attr::SpeculativeLoadHardening: {
+    break;
+  }
   case attr::StdCall: {
     break;
   }
@@ -1291,6 +1312,9 @@
       OS << " IR_ARCFieldWithOwnership";
       break;
     }
+    break;
+  }
+  case attr::Uninitialized: {
     break;
   }
   case attr::Unused: {

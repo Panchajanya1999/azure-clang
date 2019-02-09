@@ -77,6 +77,12 @@ struct GCOVOptions {
   // Emit the exit block immediately after the start block, rather than after
   // all of the function body's blocks.
   bool ExitBlockBeforeBody;
+
+  // Regexes separated by a semi-colon to filter the files to instrument.
+  std::string Filter;
+
+  // Regexes separated by a semi-colon to filter the files to not instrument.
+  std::string Exclude;
 };
 
 ModulePass *createGCOVProfilerPass(const GCOVOptions &Options =
@@ -143,7 +149,8 @@ FunctionPass *createAddressSanitizerFunctionPass(bool CompileKernel = false,
                                                  bool UseAfterScope = false);
 ModulePass *createAddressSanitizerModulePass(bool CompileKernel = false,
                                              bool Recover = false,
-                                             bool UseGlobalsGC = true);
+                                             bool UseGlobalsGC = true,
+                                             bool UseOdrIndicator = true);
 
 // Insert MemorySanitizer instrumentation (detection of uninitialized reads)
 FunctionPass *createMemorySanitizerPass(int TrackOrigins = 0,

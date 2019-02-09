@@ -200,6 +200,8 @@
   __interceptor_pthread_spin_lock;
   __interceptor_pthread_spin_trylock;
   __interceptor_pthread_spin_unlock;
+  __interceptor_pthread_timedjoin_np;
+  __interceptor_pthread_tryjoin_np;
   __interceptor_puts;
   __interceptor_pvalloc;
   __interceptor_pwrite;
@@ -232,9 +234,13 @@
   __interceptor_sendmmsg;
   __interceptor_sendmsg;
   __interceptor_sendto;
+  __interceptor_setbuf;
+  __interceptor_setbuffer;
   __interceptor_setitimer;
   __interceptor_setjmp;
+  __interceptor_setlinebuf;
   __interceptor_setlocale;
+  __interceptor_setvbuf;
   __interceptor_sigaction;
   __interceptor_sigblock;
   __interceptor_siglongjmp;
@@ -1194,6 +1200,8 @@
   pthread_spin_lock;
   pthread_spin_trylock;
   pthread_spin_unlock;
+  pthread_timedjoin_np;
+  pthread_tryjoin_np;
   puts;
   pvalloc;
   pwrite;
@@ -1225,9 +1233,13 @@
   sendmmsg;
   sendmsg;
   sendto;
+  setbuf;
+  setbuffer;
   setitimer;
   setjmp;
+  setlinebuf;
   setlocale;
+  setvbuf;
   sigaction;
   sigblock;
   siglongjmp;

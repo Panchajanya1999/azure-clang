@@ -179,8 +179,12 @@
   __interceptor_sendmmsg;
   __interceptor_sendmsg;
   __interceptor_sendto;
+  __interceptor_setbuf;
+  __interceptor_setbuffer;
   __interceptor_setitimer;
+  __interceptor_setlinebuf;
   __interceptor_setlocale;
+  __interceptor_setvbuf;
   __interceptor_sigaction;
   __interceptor_siglongjmp;
   __interceptor_signal;
@@ -1102,8 +1106,12 @@
   sendmmsg;
   sendmsg;
   sendto;
+  setbuf;
+  setbuffer;
   setitimer;
+  setlinebuf;
   setlocale;
+  setvbuf;
   sigaction;
   siglongjmp;
   signal;

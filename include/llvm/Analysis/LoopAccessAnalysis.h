@@ -97,6 +97,17 @@ public:
   /// Set of potential dependent memory accesses.
   typedef EquivalenceClasses<MemAccessInfo> DepCandidates;
 
+  /// Type to keep track of the status of the dependence check. The order of
+  /// the elements is important and has to be from most permissive to least
+  /// permissive.
+  enum class VectorizationSafetyStatus {
+    // Can vectorize safely without RT checks. All dependences are known to be
+    // safe.
+    Safe,
+    // Cannot vectorize due to unsafe or unknown dependencies.
+    Unsafe,
+  };
+
   /// Dependece between memory access instructions.
   struct Dependence {
     /// The type of the dependence.
@@ -146,7 +157,7 @@ public:
     Instruction *getDestination(const LoopAccessInfo &LAI) const;
 
     /// Dependence types that don't prevent vectorization.
-    static bool isSafeForVectorization(DepType Type);
+    static VectorizationSafetyStatus isSafeForVectorization(DepType Type);
 
     /// Lexically forward dependence.
     bool isForward() const;
@@ -164,8 +175,8 @@ public:
 
   MemoryDepChecker(PredicatedScalarEvolution &PSE, const Loop *L)
       : PSE(PSE), InnermostLoop(L), AccessIdx(0), MaxSafeRegisterWidth(-1U),
-        ShouldRetryWithRuntimeCheck(false), SafeForVectorization(true),
-        RecordDependences(true) {}
+        ShouldRetryWithRuntimeCheck(false),
+        Status(VectorizationSafetyStatus::Safe), RecordDependences(true) {}
 
   /// Register the location (instructions are given increasing numbers)
   /// of a write access.
@@ -193,7 +204,9 @@ public:
 
   /// No memory dependence was encountered that would inhibit
   /// vectorization.
-  bool isSafeForVectorization() const { return SafeForVectorization; }
+  bool isSafeForVectorization() const {
+    return Status == VectorizationSafetyStatus::Safe;
+  }
 
   /// The maximum number of bytes of a vector register we can vectorize
   /// the accesses safely with.
@@ -269,9 +282,9 @@ private:
   /// vectorize this loop with runtime checks.
   bool ShouldRetryWithRuntimeCheck;
 
-  /// No memory dependence was encountered that would inhibit
-  /// vectorization.
-  bool SafeForVectorization;
+  /// Result of the dependence checks, indicating whether the checked
+  /// dependences are safe for vectorization or not.
+  VectorizationSafetyStatus Status;
 
   //// True if Dependences reflects the dependences in the
   //// loop.  If false we exceeded MaxDependences and
@@ -304,6 +317,10 @@ private:
   /// \return false if we shouldn't vectorize at all or avoid larger
   /// vectorization factors by limiting MaxSafeDepDistBytes.
   bool couldPreventStoreLoadForward(uint64_t Distance, uint64_t TypeByteSize);
+
+  /// Updates the current safety status with \p S. We can go from Safe to
+  /// to Unsafe.
+  void mergeInStatus(VectorizationSafetyStatus S);
 };
 
 /// Holds information about the memory runtime legality checks to verify
@@ -564,10 +581,10 @@ public:
   /// Print the information about the memory accesses in the loop.
   void print(raw_ostream &OS, unsigned Depth = 0) const;
 
-  /// If the loop has multiple stores to an invariant address, then
-  /// return true, else return false.
-  bool hasMultipleStoresToLoopInvariantAddress() const {
-    return HasMultipleStoresToLoopInvariantAddress;
+  /// If the loop has memory dependence involving an invariant address, i.e. two
+  /// stores or a store and a load, then return true, else return false.
+  bool hasDependenceInvolvingLoopInvariantAddress() const {
+    return HasDependenceInvolvingLoopInvariantAddress;
   }
 
   /// Used to add runtime SCEV checks. Simplifies SCEV expressions and converts
@@ -620,8 +637,8 @@ private:
   /// Cache the result of analyzeLoop.
   bool CanVecMem;
 
-  /// Indicator that there are multiple stores to a uniform address.
-  bool HasMultipleStoresToLoopInvariantAddress;
+  /// Indicator that there are non vectorizable stores to a uniform address.
+  bool HasDependenceInvolvingLoopInvariantAddress;
 
   /// The diagnostics report generated for the analysis.  E.g. why we
   /// couldn't analyze the loop.

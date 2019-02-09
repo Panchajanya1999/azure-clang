@@ -7,6 +7,15 @@
 \*===----------------------------------------------------------------------===*/
 
   switch (AttrKind) {
+  case AT_AArch64VectorPcs: {
+    if (Name == "aarch64_vector_pcs" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "aarch64_vector_pcs" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "aarch64_vector_pcs" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
   case AT_AMDGPUFlatWorkGroupSize: {
     if (Name == "amdgpu_flat_work_group_size" && SyntaxUsed == 0 && Scope == "")
         return 0;
@@ -953,6 +962,15 @@
         return 1;
     break;
   }
+  case AT_NoDeref: {
+    if (Name == "noderef" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "noderef" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "noderef" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
   case AT_NoDestroy: {
     if (Name == "no_destroy" && SyntaxUsed == 0 && Scope == "")
         return 0;
@@ -1094,6 +1112,42 @@
     if (Name == "not_tail_called" && SyntaxUsed == 1 && Scope == "clang")
         return 1;
     if (Name == "not_tail_called" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_OSConsumed: {
+    if (Name == "os_consumed" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "os_consumed" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "os_consumed" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_OSConsumesThis: {
+    if (Name == "os_consumes_this" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "os_consumes_this" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "os_consumes_this" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_OSReturnsNotRetained: {
+    if (Name == "os_returns_not_retained" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "os_returns_not_retained" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "os_returns_not_retained" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_OSReturnsRetained: {
+    if (Name == "os_returns_retained" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "os_returns_retained" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "os_returns_retained" && SyntaxUsed == 2 && Scope == "clang")
         return 2;
     break;
   }
@@ -1657,6 +1711,15 @@
         return 0;
     break;
   }
+  case AT_SpeculativeLoadHardening: {
+    if (Name == "speculative_load_hardening" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "speculative_load_hardening" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "speculative_load_hardening" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
   case AT_StdCall: {
     if (Name == "stdcall" && SyntaxUsed == 0 && Scope == "")
         return 0;
@@ -1823,6 +1886,13 @@
         return 1;
     if (Name == "unavailable" && SyntaxUsed == 2 && Scope == "clang")
         return 2;
+    break;
+  }
+  case AT_Uninitialized: {
+    if (Name == "uninitialized" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "uninitialized" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
     break;
   }
   case AT_Unused: {

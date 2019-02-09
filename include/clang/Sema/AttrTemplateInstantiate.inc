@@ -12,6 +12,10 @@ namespace sema {
 Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
         const MultiLevelTemplateArgumentList &TemplateArgs) {
   switch (At->getKind()) {
+    case attr::AArch64VectorPcs: {
+      const auto *A = cast<AArch64VectorPcsAttr>(At);
+      return A->clone(C);
+    }
     case attr::AMDGPUFlatWorkGroupSize: {
       const auto *A = cast<AMDGPUFlatWorkGroupSizeAttr>(At);
       return A->clone(C);
@@ -650,6 +654,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<NoDebugAttr>(At);
       return A->clone(C);
     }
+    case attr::NoDeref: {
+      const auto *A = cast<NoDerefAttr>(At);
+      return A->clone(C);
+    }
     case attr::NoDestroy: {
       const auto *A = cast<NoDestroyAttr>(At);
       return A->clone(C);
@@ -732,6 +740,22 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::OMPThreadPrivateDecl: {
       const auto *A = cast<OMPThreadPrivateDeclAttr>(At);
+      return A->clone(C);
+    }
+    case attr::OSConsumed: {
+      const auto *A = cast<OSConsumedAttr>(At);
+      return A->clone(C);
+    }
+    case attr::OSConsumesThis: {
+      const auto *A = cast<OSConsumesThisAttr>(At);
+      return A->clone(C);
+    }
+    case attr::OSReturnsNotRetained: {
+      const auto *A = cast<OSReturnsNotRetainedAttr>(At);
+      return A->clone(C);
+    }
+    case attr::OSReturnsRetained: {
+      const auto *A = cast<OSReturnsRetainedAttr>(At);
       return A->clone(C);
     }
     case attr::ObjCBoxable: {
@@ -1059,6 +1083,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       }
       return new (C) SharedTrylockFunctionAttr(A->getLocation(), C, tempInstSuccessValue, tempInstArgs, A->args_size(), A->getSpellingListIndex());
     }
+    case attr::SpeculativeLoadHardening: {
+      const auto *A = cast<SpeculativeLoadHardeningAttr>(At);
+      return A->clone(C);
+    }
     case attr::StdCall: {
       const auto *A = cast<StdCallAttr>(At);
       return A->clone(C);
@@ -1163,6 +1191,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<UnavailableAttr>(At);
       return A->clone(C);
     }
+    case attr::Uninitialized: {
+      const auto *A = cast<UninitializedAttr>(At);
+      return A->clone(C);
+    }
     case attr::Unused: {
       const auto *A = cast<UnusedAttr>(At);
       return A->clone(C);
@@ -1235,6 +1267,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
  ASTContext &C, Sema &S,
         const MultiLevelTemplateArgumentList &TemplateArgs) {
   switch (At->getKind()) {
+    case attr::AArch64VectorPcs: {
+      return nullptr;
+    }
     case attr::AMDGPUFlatWorkGroupSize: {
       return nullptr;
     }
@@ -1628,6 +1663,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
     case attr::NoDebug: {
       return nullptr;
     }
+    case attr::NoDeref: {
+      return nullptr;
+    }
     case attr::NoDestroy: {
       return nullptr;
     }
@@ -1689,6 +1727,18 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::OMPThreadPrivateDecl: {
+      return nullptr;
+    }
+    case attr::OSConsumed: {
+      return nullptr;
+    }
+    case attr::OSConsumesThis: {
+      return nullptr;
+    }
+    case attr::OSReturnsNotRetained: {
+      return nullptr;
+    }
+    case attr::OSReturnsRetained: {
       return nullptr;
     }
     case attr::ObjCBoxable: {
@@ -1901,6 +1951,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
     case attr::SharedTrylockFunction: {
       return nullptr;
     }
+    case attr::SpeculativeLoadHardening: {
+      return nullptr;
+    }
     case attr::StdCall: {
       return nullptr;
     }
@@ -1965,6 +2018,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::Unavailable: {
+      return nullptr;
+    }
+    case attr::Uninitialized: {
       return nullptr;
     }
     case attr::Unused: {
