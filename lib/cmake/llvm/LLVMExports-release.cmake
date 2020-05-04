@@ -174,6 +174,16 @@ set_target_properties(LLVMDWARFLinker PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS LLVMDWARFLinker )
 list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMDWARFLinker "${_IMPORT_PREFIX}/lib/libLLVMDWARFLinker.a" )
 
+# Import target "LLVMExtensions" for configuration "Release"
+set_property(TARGET LLVMExtensions APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMExtensions PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMExtensions.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS LLVMExtensions )
+list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMExtensions "${_IMPORT_PREFIX}/lib/libLLVMExtensions.a" )
+
 # Import target "LLVMFrontendOpenMP" for configuration "Release"
 set_property(TARGET LLVMFrontendOpenMP APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMFrontendOpenMP PROPERTIES
