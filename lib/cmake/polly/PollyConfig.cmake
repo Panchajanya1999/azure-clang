@@ -1,15 +1,15 @@
 # This file allows users to call find_package(Polly) and pick up our targets.
 
 find_package(LLVM REQUIRED CONFIG
-             HINTS "/nvme/home/hyper/kernel/toolchain/tc-build/build/llvm/stage3/lib/cmake/llvm")
+             HINTS "/home/hyper/kernel/toolchain/tc-build/build/llvm/stage3/lib/cmake/llvm")
 
 set(Polly_CMAKE_DIR ${CMAKE_CURRENT_LIST_DIR})
 set(Polly_BUNDLED_ISL ON)
 set(Polly_ENABLE_GPGPU_CODEGEN OFF)
 
 set(Polly_DEFINITIONS ${LLVM_DEFINITIONS})
-set(Polly_INCLUDE_DIRS /nvme/home/hyper/kernel/toolchain/tc-build/install/include;/nvme/home/hyper/kernel/toolchain/tc-build/install/include/polly ${LLVM_INCLUDE_DIRS})
-set(Polly_LIBRARY_DIRS /nvme/home/hyper/kernel/toolchain/tc-build/install/lib)
+set(Polly_INCLUDE_DIRS /home/hyper/kernel/toolchain/tc-build/install/include;/home/hyper/kernel/toolchain/tc-build/install/include/polly ${LLVM_INCLUDE_DIRS})
+set(Polly_LIBRARY_DIRS /home/hyper/kernel/toolchain/tc-build/install/lib)
 set(Polly_EXPORTED_TARGETS Polly;PollyISL;LLVMPolly)
 set(Polly_LIBRARIES ${LLVM_LIBRARIES} ${Polly_EXPORTED_TARGETS})
 
