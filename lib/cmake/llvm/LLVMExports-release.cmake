@@ -64,6 +64,16 @@ set_target_properties(LLVMFuzzMutate PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS LLVMFuzzMutate )
 list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMFuzzMutate "${_IMPORT_PREFIX}/lib/libLLVMFuzzMutate.a" )
 
+# Import target "LLVMFileCheck" for configuration "Release"
+set_property(TARGET LLVMFileCheck APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMFileCheck PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMFileCheck.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS LLVMFileCheck )
+list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMFileCheck "${_IMPORT_PREFIX}/lib/libLLVMFileCheck.a" )
+
 # Import target "LLVMInterfaceStub" for configuration "Release"
 set_property(TARGET LLVMInterfaceStub APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(LLVMInterfaceStub PROPERTIES
@@ -283,6 +293,16 @@ set_target_properties(LLVMVectorize PROPERTIES
 
 list(APPEND _IMPORT_CHECK_TARGETS LLVMVectorize )
 list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMVectorize "${_IMPORT_PREFIX}/lib/libLLVMVectorize.a" )
+
+# Import target "LLVMHelloNew" for configuration "Release"
+set_property(TARGET LLVMHelloNew APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+set_target_properties(LLVMHelloNew PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LOCATION_RELEASE "${_IMPORT_PREFIX}/lib/libLLVMHelloNew.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS LLVMHelloNew )
+list(APPEND _IMPORT_CHECK_FILES_FOR_LLVMHelloNew "${_IMPORT_PREFIX}/lib/libLLVMHelloNew.a" )
 
 # Import target "LLVMObjCARCOpts" for configuration "Release"
 set_property(TARGET LLVMObjCARCOpts APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
