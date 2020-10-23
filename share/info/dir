@@ -50,3 +50,4 @@ Software development
 * Binutils: (binutils).         The GNU binary utilities.
 * Gas: (as).                    The GNU assembler.
 * Ld: (ld).                     The GNU linker.
+* gprof: (gprof).               Profiling your program's execution
