@@ -23,10 +23,11 @@
 #endif //cl_khr_3d_image_writes
 #endif //__OPENCL_C_VERSION__ < CL_VERSION_2_0
 
-#if defined(__OPENCL_CPP_VERSION__) || (__OPENCL_C_VERSION__ >= CL_VERSION_1_2)
+
+#if (defined(__OPENCL_CPP_VERSION__) || (__OPENCL_C_VERSION__ >= CL_VERSION_1_2)) && defined(__SPIR__)
 #pragma OPENCL EXTENSION cl_intel_planar_yuv : begin
 #pragma OPENCL EXTENSION cl_intel_planar_yuv : end
-#endif // defined(__OPENCL_CPP_VERSION__) || (__OPENCL_C_VERSION__ >= CL_VERSION_1_2)
+#endif // (defined(__OPENCL_CPP_VERSION__) || (__OPENCL_C_VERSION__ >= CL_VERSION_1_2)) && defined(__SPIR__)
 
 #define __ovld __attribute__((overloadable))
 #define __conv __attribute__((convergent))
@@ -6339,101 +6340,6 @@ half16 __ovld __cnfn convert_half16_rtz(double16);
 
 #endif // cl_khr_fp16
 
-/**
- * OpenCL v1.1/1.2/2.0 s6.2.4.2 - as_type operators
- * Reinterprets a data type as another data type of the same size
- */
-#define as_char(x) __builtin_astype((x),   char)
-#define as_char2(x) __builtin_astype((x),  char2)
-#define as_char3(x) __builtin_astype((x),  char3)
-#define as_char4(x) __builtin_astype((x),  char4)
-#define as_char8(x) __builtin_astype((x),  char8)
-#define as_char16(x) __builtin_astype((x), char16)
-
-#define as_uchar(x) __builtin_astype((x),   uchar)
-#define as_uchar2(x) __builtin_astype((x),  uchar2)
-#define as_uchar3(x) __builtin_astype((x),  uchar3)
-#define as_uchar4(x) __builtin_astype((x),  uchar4)
-#define as_uchar8(x) __builtin_astype((x),  uchar8)
-#define as_uchar16(x) __builtin_astype((x), uchar16)
-
-#define as_short(x) __builtin_astype((x),   short)
-#define as_short2(x) __builtin_astype((x),  short2)
-#define as_short3(x) __builtin_astype((x),  short3)
-#define as_short4(x) __builtin_astype((x),  short4)
-#define as_short8(x) __builtin_astype((x),  short8)
-#define as_short16(x) __builtin_astype((x), short16)
-
-#define as_ushort(x) __builtin_astype((x),   ushort)
-#define as_ushort2(x) __builtin_astype((x),  ushort2)
-#define as_ushort3(x) __builtin_astype((x),  ushort3)
-#define as_ushort4(x) __builtin_astype((x),  ushort4)
-#define as_ushort8(x) __builtin_astype((x),  ushort8)
-#define as_ushort16(x) __builtin_astype((x), ushort16)
-
-#define as_int(x) __builtin_astype((x),   int)
-#define as_int2(x) __builtin_astype((x),  int2)
-#define as_int3(x) __builtin_astype((x),  int3)
-#define as_int4(x) __builtin_astype((x),  int4)
-#define as_int8(x) __builtin_astype((x),  int8)
-#define as_int16(x) __builtin_astype((x), int16)
-
-#define as_uint(x) __builtin_astype((x),   uint)
-#define as_uint2(x) __builtin_astype((x),  uint2)
-#define as_uint3(x) __builtin_astype((x),  uint3)
-#define as_uint4(x) __builtin_astype((x),  uint4)
-#define as_uint8(x) __builtin_astype((x),  uint8)
-#define as_uint16(x) __builtin_astype((x), uint16)
-
-#define as_long(x) __builtin_astype((x),   long)
-#define as_long2(x) __builtin_astype((x),  long2)
-#define as_long3(x) __builtin_astype((x),  long3)
-#define as_long4(x) __builtin_astype((x),  long4)
-#define as_long8(x) __builtin_astype((x),  long8)
-#define as_long16(x) __builtin_astype((x), long16)
-
-#define as_ulong(x) __builtin_astype((x),   ulong)
-#define as_ulong2(x) __builtin_astype((x),  ulong2)
-#define as_ulong3(x) __builtin_astype((x),  ulong3)
-#define as_ulong4(x) __builtin_astype((x),  ulong4)
-#define as_ulong8(x) __builtin_astype((x),  ulong8)
-#define as_ulong16(x) __builtin_astype((x), ulong16)
-
-#define as_float(x) __builtin_astype((x),   float)
-#define as_float2(x) __builtin_astype((x),  float2)
-#define as_float3(x) __builtin_astype((x),  float3)
-#define as_float4(x) __builtin_astype((x),  float4)
-#define as_float8(x) __builtin_astype((x),  float8)
-#define as_float16(x) __builtin_astype((x), float16)
-
-#ifdef cl_khr_fp64
-#define as_double(x) __builtin_astype((x),   double)
-#define as_double2(x) __builtin_astype((x),  double2)
-#define as_double3(x) __builtin_astype((x),  double3)
-#define as_double4(x) __builtin_astype((x),  double4)
-#define as_double8(x) __builtin_astype((x),  double8)
-#define as_double16(x) __builtin_astype((x), double16)
-#endif //cl_khr_fp64
-
-#ifdef cl_khr_fp16
-#define as_half(x) __builtin_astype((x),   half)
-#define as_half2(x) __builtin_astype((x),  half2)
-#define as_half3(x) __builtin_astype((x),  half3)
-#define as_half4(x) __builtin_astype((x),  half4)
-#define as_half8(x) __builtin_astype((x),  half8)
-#define as_half16(x) __builtin_astype((x), half16)
-#endif //cl_khr_fp16
-
-// OpenCL v1.1 s6.9, v1.2/2.0 s6.10 - Function qualifiers
-
-#define __kernel_exec(X, typen) __kernel \
-	__attribute__((work_group_size_hint(X, 1, 1))) \
-	__attribute__((vec_type_hint(typen)))
-
-#define kernel_exec(X, typen) __kernel \
-	__attribute__((work_group_size_hint(X, 1, 1))) \
-	__attribute__((vec_type_hint(typen)))
-
 // OpenCL v1.1 s6.11.1, v1.2 s6.12.1, v2.0 s6.13.1 - Work-item Functions
 
 /**
@@ -6494,8 +6400,7 @@ size_t __ovld __cnfn get_local_id(uint dimindx);
  * Returns the number of work-groups that will execute a
  * kernel for dimension identified by dimindx.
  * Valid values of dimindx are 0 to get_work_dim() - 1.
- * For other values of dimindx, get_num_groups () returns
- * 1.
+ * For other values of dimindx, get_num_groups() returns 1.
  * For clEnqueueTask, this always returns 1.
  */
 size_t __ovld __cnfn get_num_groups(uint dimindx);
@@ -9449,54 +9354,54 @@ ulong16 __ovld __cnfn clz(ulong16 x);
  * component type of x, if x is a vector.
  */
 #if defined(__OPENCL_CPP_VERSION__) || (__OPENCL_C_VERSION__ >= CL_VERSION_2_0)
-char __ovld ctz(char x);
-uchar __ovld ctz(uchar x);
-char2 __ovld ctz(char2 x);
-uchar2 __ovld ctz(uchar2 x);
-char3 __ovld ctz(char3 x);
-uchar3 __ovld ctz(uchar3 x);
-char4 __ovld ctz(char4 x);
-uchar4 __ovld ctz(uchar4 x);
-char8 __ovld ctz(char8 x);
-uchar8 __ovld ctz(uchar8 x);
-char16 __ovld ctz(char16 x);
-uchar16 __ovld ctz(uchar16 x);
-short __ovld ctz(short x);
-ushort __ovld ctz(ushort x);
-short2 __ovld ctz(short2 x);
-ushort2 __ovld ctz(ushort2 x);
-short3 __ovld ctz(short3 x);
-ushort3 __ovld ctz(ushort3 x);
-short4 __ovld ctz(short4 x);
-ushort4 __ovld ctz(ushort4 x);
-short8 __ovld ctz(short8 x);
-ushort8 __ovld ctz(ushort8 x);
-short16 __ovld ctz(short16 x);
-ushort16 __ovld ctz(ushort16 x);
-int __ovld ctz(int x);
-uint __ovld ctz(uint x);
-int2 __ovld ctz(int2 x);
-uint2 __ovld ctz(uint2 x);
-int3 __ovld ctz(int3 x);
-uint3 __ovld ctz(uint3 x);
-int4 __ovld ctz(int4 x);
-uint4 __ovld ctz(uint4 x);
-int8 __ovld ctz(int8 x);
-uint8 __ovld ctz(uint8 x);
-int16 __ovld ctz(int16 x);
-uint16 __ovld ctz(uint16 x);
-long __ovld ctz(long x);
-ulong __ovld ctz(ulong x);
-long2 __ovld ctz(long2 x);
-ulong2 __ovld ctz(ulong2 x);
-long3 __ovld ctz(long3 x);
-ulong3 __ovld ctz(ulong3 x);
-long4 __ovld ctz(long4 x);
-ulong4 __ovld ctz(ulong4 x);
-long8 __ovld ctz(long8 x);
-ulong8 __ovld ctz(ulong8 x);
-long16 __ovld ctz(long16 x);
-ulong16 __ovld ctz(ulong16 x);
+char __ovld __cnfn ctz(char x);
+uchar __ovld __cnfn ctz(uchar x);
+char2 __ovld __cnfn ctz(char2 x);
+uchar2 __ovld __cnfn ctz(uchar2 x);
+char3 __ovld __cnfn ctz(char3 x);
+uchar3 __ovld __cnfn ctz(uchar3 x);
+char4 __ovld __cnfn ctz(char4 x);
+uchar4 __ovld __cnfn ctz(uchar4 x);
+char8 __ovld __cnfn ctz(char8 x);
+uchar8 __ovld __cnfn ctz(uchar8 x);
+char16 __ovld __cnfn ctz(char16 x);
+uchar16 __ovld __cnfn ctz(uchar16 x);
+short __ovld __cnfn ctz(short x);
+ushort __ovld __cnfn ctz(ushort x);
+short2 __ovld __cnfn ctz(short2 x);
+ushort2 __ovld __cnfn ctz(ushort2 x);
+short3 __ovld __cnfn ctz(short3 x);
+ushort3 __ovld __cnfn ctz(ushort3 x);
+short4 __ovld __cnfn ctz(short4 x);
+ushort4 __ovld __cnfn ctz(ushort4 x);
+short8 __ovld __cnfn ctz(short8 x);
+ushort8 __ovld __cnfn ctz(ushort8 x);
+short16 __ovld __cnfn ctz(short16 x);
+ushort16 __ovld __cnfn ctz(ushort16 x);
+int __ovld __cnfn ctz(int x);
+uint __ovld __cnfn ctz(uint x);
+int2 __ovld __cnfn ctz(int2 x);
+uint2 __ovld __cnfn ctz(uint2 x);
+int3 __ovld __cnfn ctz(int3 x);
+uint3 __ovld __cnfn ctz(uint3 x);
+int4 __ovld __cnfn ctz(int4 x);
+uint4 __ovld __cnfn ctz(uint4 x);
+int8 __ovld __cnfn ctz(int8 x);
+uint8 __ovld __cnfn ctz(uint8 x);
+int16 __ovld __cnfn ctz(int16 x);
+uint16 __ovld __cnfn ctz(uint16 x);
+long __ovld __cnfn ctz(long x);
+ulong __ovld __cnfn ctz(ulong x);
+long2 __ovld __cnfn ctz(long2 x);
+ulong2 __ovld __cnfn ctz(ulong2 x);
+long3 __ovld __cnfn ctz(long3 x);
+ulong3 __ovld __cnfn ctz(ulong3 x);
+long4 __ovld __cnfn ctz(long4 x);
+ulong4 __ovld __cnfn ctz(ulong4 x);
+long8 __ovld __cnfn ctz(long8 x);
+ulong8 __ovld __cnfn ctz(ulong8 x);
+long16 __ovld __cnfn ctz(long16 x);
+ulong16 __ovld __cnfn ctz(ulong16 x);
 #endif //defined(__OPENCL_CPP_VERSION__) || (__OPENCL_C_VERSION__ >= CL_VERSION_2_0)
 
 /**
@@ -10002,6 +9907,7 @@ ulong16 __ovld __cnfn upsample(uint16 hi, uint16 lo);
 /*
  * popcount(x): returns the number of set bit in x
  */
+#if defined(__OPENCL_CPP_VERSION__) || (__OPENCL_C_VERSION__ >= CL_VERSION_1_2)
 char __ovld __cnfn popcount(char x);
 uchar __ovld __cnfn popcount(uchar x);
 char2 __ovld __cnfn popcount(char2 x);
@@ -10050,6 +9956,7 @@ long8 __ovld __cnfn popcount(long8 x);
 ulong8 __ovld __cnfn popcount(ulong8 x);
 long16 __ovld __cnfn popcount(long16 x);
 ulong16 __ovld __cnfn popcount(ulong16 x);
+#endif // defined(__OPENCL_CPP_VERSION__) || (__OPENCL_C_VERSION__ >= CL_VERSION_1_2)
 
 /**
  * Multiply two 24-bit integer values x and y and add
@@ -13488,7 +13395,6 @@ ulong __ovld atomic_fetch_max_explicit(volatile atomic_ulong *object, ulong oper
 
 // OpenCL v2.0 s6.13.11.7.5:
 // add/sub: atomic type argument can be uintptr_t/intptr_t, value type argument can be ptrdiff_t.
-// or/xor/and/min/max: atomic type argument can be intptr_t/uintptr_t, value type argument can be intptr_t/uintptr_t.
 
 #if defined(cl_khr_int64_base_atomics) && defined(cl_khr_int64_extended_atomics)
 uintptr_t __ovld atomic_fetch_add(volatile atomic_uintptr_t *object, ptrdiff_t operand);
@@ -13497,38 +13403,6 @@ uintptr_t __ovld atomic_fetch_add_explicit(volatile atomic_uintptr_t *object, pt
 uintptr_t __ovld atomic_fetch_sub(volatile atomic_uintptr_t *object, ptrdiff_t operand);
 uintptr_t __ovld atomic_fetch_sub_explicit(volatile atomic_uintptr_t *object, ptrdiff_t operand, memory_order order);
 uintptr_t __ovld atomic_fetch_sub_explicit(volatile atomic_uintptr_t *object, ptrdiff_t operand, memory_order order, memory_scope scope);
-
-uintptr_t __ovld atomic_fetch_or(volatile atomic_uintptr_t *object, intptr_t operand);
-uintptr_t __ovld atomic_fetch_or_explicit(volatile atomic_uintptr_t *object, intptr_t operand, memory_order order);
-uintptr_t __ovld atomic_fetch_or_explicit(volatile atomic_uintptr_t *object, intptr_t operand, memory_order order, memory_scope scope);
-uintptr_t __ovld atomic_fetch_xor(volatile atomic_uintptr_t *object, intptr_t operand);
-uintptr_t __ovld atomic_fetch_xor_explicit(volatile atomic_uintptr_t *object, intptr_t operand, memory_order order);
-uintptr_t __ovld atomic_fetch_xor_explicit(volatile atomic_uintptr_t *object, intptr_t operand, memory_order order, memory_scope scope);
-uintptr_t __ovld atomic_fetch_and(volatile atomic_uintptr_t *object, intptr_t operand);
-uintptr_t __ovld atomic_fetch_and_explicit(volatile atomic_uintptr_t *object, intptr_t operand, memory_order order);
-uintptr_t __ovld atomic_fetch_and_explicit(volatile atomic_uintptr_t *object, intptr_t operand, memory_order order, memory_scope scope);
-uintptr_t __ovld atomic_fetch_min(volatile atomic_uintptr_t *object, intptr_t opermax);
-uintptr_t __ovld atomic_fetch_min_explicit(volatile atomic_uintptr_t *object, intptr_t opermax, memory_order minder);
-uintptr_t __ovld atomic_fetch_min_explicit(volatile atomic_uintptr_t *object, intptr_t opermax, memory_order minder, memory_scope scope);
-uintptr_t __ovld atomic_fetch_max(volatile atomic_uintptr_t *object, intptr_t opermax);
-uintptr_t __ovld atomic_fetch_max_explicit(volatile atomic_uintptr_t *object, intptr_t opermax, memory_order minder);
-uintptr_t __ovld atomic_fetch_max_explicit(volatile atomic_uintptr_t *object, intptr_t opermax, memory_order minder, memory_scope scope);
-
-intptr_t __ovld atomic_fetch_or(volatile atomic_intptr_t *object, uintptr_t operand);
-intptr_t __ovld atomic_fetch_or_explicit(volatile atomic_intptr_t *object, uintptr_t operand, memory_order order);
-intptr_t __ovld atomic_fetch_or_explicit(volatile atomic_intptr_t *object, uintptr_t operand, memory_order order, memory_scope scope);
-intptr_t __ovld atomic_fetch_xor(volatile atomic_intptr_t *object, uintptr_t operand);
-intptr_t __ovld atomic_fetch_xor_explicit(volatile atomic_intptr_t *object, uintptr_t operand, memory_order order);
-intptr_t __ovld atomic_fetch_xor_explicit(volatile atomic_intptr_t *object, uintptr_t operand, memory_order order, memory_scope scope);
-intptr_t __ovld atomic_fetch_and(volatile atomic_intptr_t *object, uintptr_t operand);
-intptr_t __ovld atomic_fetch_and_explicit(volatile atomic_intptr_t *object, uintptr_t operand, memory_order order);
-intptr_t __ovld atomic_fetch_and_explicit(volatile atomic_intptr_t *object, uintptr_t operand, memory_order order, memory_scope scope);
-intptr_t __ovld atomic_fetch_min(volatile atomic_intptr_t *object, uintptr_t opermax);
-intptr_t __ovld atomic_fetch_min_explicit(volatile atomic_intptr_t *object, uintptr_t opermax, memory_order minder);
-intptr_t __ovld atomic_fetch_min_explicit(volatile atomic_intptr_t *object, uintptr_t opermax, memory_order minder, memory_scope scope);
-intptr_t __ovld atomic_fetch_max(volatile atomic_intptr_t *object, uintptr_t opermax);
-intptr_t __ovld atomic_fetch_max_explicit(volatile atomic_intptr_t *object, uintptr_t opermax, memory_order minder);
-intptr_t __ovld atomic_fetch_max_explicit(volatile atomic_intptr_t *object, uintptr_t opermax, memory_order minder, memory_scope scope);
 #endif
 
 // atomic_store()
@@ -17121,31 +16995,23 @@ uint16 __ovld amd_sadw(uint16 src0, uint16 src1, uint16 src2);
 #endif // cl_amd_media_ops2
 
 #if defined(cl_arm_integer_dot_product_int8)
-#pragma OPENCL EXTENSION cl_arm_integer_dot_product_int8 : begin
 uint __ovld arm_dot(uchar4 a, uchar4 b);
 int __ovld arm_dot(char4 a, char4 b);
-#pragma OPENCL EXTENSION cl_arm_integer_dot_product_int8 : end
 #endif // defined(cl_arm_integer_dot_product_int8)
 
 #if defined(cl_arm_integer_dot_product_accumulate_int8)
-#pragma OPENCL EXTENSION cl_arm_integer_dot_product_accumulate_int8 : begin
 uint __ovld arm_dot_acc(uchar4 a, uchar4 b, uint c);
 int __ovld arm_dot_acc(char4 a, char4 b, int c);
-#pragma OPENCL EXTENSION cl_arm_integer_dot_product_accumulate_int8 : end
 #endif // defined(cl_arm_integer_dot_product_accumulate_int8)
 
 #if defined(cl_arm_integer_dot_product_accumulate_int16)
-#pragma OPENCL EXTENSION cl_arm_integer_dot_product_accumulate_int16 : begin
 uint __ovld arm_dot_acc(ushort2 a, ushort2 b, uint c);
 int __ovld arm_dot_acc(short2 a, short2 b, int c);
-#pragma OPENCL EXTENSION cl_arm_integer_dot_product_accumulate_int16 : end
 #endif // defined(cl_arm_integer_dot_product_accumulate_int16)
 
 #if defined(cl_arm_integer_dot_product_accumulate_saturate_int8)
-#pragma OPENCL EXTENSION cl_arm_integer_dot_product_accumulate_saturate_int8 : begin
 uint __ovld arm_dot_acc_sat(uchar4 a, uchar4 b, uint c);
 int __ovld arm_dot_acc_sat(char4 a, char4 b, int c);
-#pragma OPENCL EXTENSION cl_arm_integer_dot_product_accumulate_saturate_int8 : end
 #endif // defined(cl_arm_integer_dot_product_accumulate_saturate_int8)
 
 // Disable any extensions we may have enabled previously.
